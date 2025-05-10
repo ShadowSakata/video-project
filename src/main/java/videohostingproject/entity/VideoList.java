@@ -21,6 +21,17 @@ public class VideoList extends ListOfIdentifiables<Video> {
         }
         return null;
     }
+
+    public VideoList searchVideos(String input) {
+        VideoList result = new VideoList();
+        for (Video video : identifiables) {
+            if (video.getTitle().toLowerCase().contains(input.toLowerCase())) {
+                result.addVideo(video);
+            }
+        }
+        return result;
+    }
+
     public void deleteVideo(Video video) {
         identifiables.remove(video);
     }
