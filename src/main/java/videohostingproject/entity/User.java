@@ -1,13 +1,16 @@
 package videohostingproject.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class User implements Serializable, Identifiable {
-    private final int id;
+    private static int lastId = 0;
+    private int id;
     private String username;
     private String password;
     private String email;
     private Boolean isAdmin;
+    private ArrayList<Integer> history;
 
     public User(int id, String username, String password, String email, Boolean isAdmin) {
         this.id = id;
@@ -15,12 +18,17 @@ public class User implements Serializable, Identifiable {
         this.password = password;
         this.email = email;
         this.isAdmin = isAdmin;
+        this.history = new ArrayList<>();
     }
     public User(int id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.isAdmin = false;
+    }
+    public User(){
+        this.id = 0;
     }
 
     public String getUsername() {
@@ -51,6 +59,9 @@ public class User implements Serializable, Identifiable {
     public int getId() {
         return id;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Boolean getAdmin() {
         return isAdmin;
@@ -58,5 +69,12 @@ public class User implements Serializable, Identifiable {
 
     public void setAdmin(Boolean admin) {
         isAdmin = admin;
+    }
+
+    public ArrayList<Integer> getHistory() {
+        return history;
+    }
+    public void addToHistory(int id) {
+        history.add(id);
     }
 }

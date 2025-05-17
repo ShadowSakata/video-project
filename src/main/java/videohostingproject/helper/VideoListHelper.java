@@ -1,32 +1,29 @@
 package videohostingproject.helper;
 
-import jakarta.servlet.ServletContext;
-import videohostingproject.entity.VideoList;
+import videohostingproject.entity.Video;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public abstract class VideoListHelper {
-    private static final String VIDEOS_FILENAME = "WEB-INF/vids.dat";
-    private static String VIDEOS_PATH = null;
 
-    public static VideoList readAdList(ServletContext context) {
+    public static ArrayList<Video> readAdList(String dataPath) {
         try {
-            VIDEOS_PATH = context.getRealPath(VIDEOS_FILENAME);
             ObjectInputStream in = new ObjectInputStream(new
-                    FileInputStream(VIDEOS_PATH));
-            return (VideoList)in.readObject();
+                    FileInputStream(dataPath));
+            return (ArrayList<Video>)in.readObject();
         } catch (Exception e) {
-            return new VideoList();
+            return new ArrayList<Video>();
         }
     }
 
-    public static void saveAdList(VideoList videos) {
+    public static void saveAdList(ArrayList<Video> videos, String dataPath) {
         synchronized (videos) {
             try {
-                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(VIDEOS_PATH));
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(dataPath));
                 out.writeObject(videos);
             } catch (Exception e) {
                 e.printStackTrace();
