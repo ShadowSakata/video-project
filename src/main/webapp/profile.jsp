@@ -47,14 +47,9 @@
         <my:userInfo user="${sessionScope.authUser}" />
 
         <!-- Video list (3x3 table filling the space) -->
-        <jsp:include page="previewHistory.jsp" />
+        <jsp:include page="/history?pgnum=${requestScope.page}" />
     </div>
 
-    <!-- Page controls -->
-    <div class="page-controls">
-        <button>Previous</button>
-        <button>Next</button>
-    </div>
 </div>
 </body>
 </html>

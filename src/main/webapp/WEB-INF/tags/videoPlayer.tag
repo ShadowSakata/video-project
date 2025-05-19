@@ -19,5 +19,5 @@
     import {MediaPlayer} from 'https://cdn.dashjs.org/v5.0.0/modern/esm/dash.all.min.js';
 
     const player = MediaPlayer().create();
-    player.initialize(document.querySelector('video'), '${dir}', true);
+    player.initialize(document.querySelector('video'), '${dir}/video.mpd', true);
 </script>

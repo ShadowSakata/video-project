@@ -1,20 +1,20 @@
 <%@ tag pageEncoding="UTF-8"%>
-<%@attribute name="user" required="true" rtexprvalue="true" type="videohostingproject.entity.User"%>
+<%@attribute name="video" required="true" rtexprvalue="true" type="videohostingproject.entity.Video"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-    .user-info {
+    .video-info {
         width: 400px;
         background-color: #ddd;
         padding: 10px;
         overflow-y: auto;
     }
 
-    .user-info ul {
+    .video-info ul {
         list-style: none;
         padding: 0;
     }
 
-    .user-info ul li {
+    .video-info ul li {
         margin: 5px 0;
         cursor: pointer;
     }
@@ -26,13 +26,15 @@
         border-radius: 5px;
     }
 </style>
-<div class="user-info">
+<div class="video-info">
     <ul>
-        <li class="cell-name">Username:</li>
-        <li>${user.username}</li>
-        <li class="cell-name">Email:</li>
-        <li>${user.email}</li>
-        <li class="cell-name">User is admin:</li>
-        <li>${user.admin}</li>
+        <li class="cell-name">Title:</li>
+        <li>${video.title}</li>
+        <li class="cell-name">Description:</li>
+    </ul>
+    <p style="word-break: break-word">${video.description}</p>
+    <ul>
+        <li class="cell-name">Uploaded by:</li>
+        <li>${video.uploader}</li>
     </ul>
 </div>

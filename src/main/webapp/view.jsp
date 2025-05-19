@@ -21,30 +21,6 @@
             height: 100vh;
         }
 
-        /* Header styles */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-        }
-
-        .header .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-        .header .search-bar input {
-            width: 200px;
-            padding: 5px;
-        }
-
-        .header .profile {
-            cursor: pointer;
-        }
-
         /* Main content area */
         .main {
             display: flex;
@@ -97,13 +73,11 @@
     <!-- Main content -->
     <div class="main">
         <!-- Video info section -->
-        <div class="video-info">
-            <h2>Video Info</h2>
-        </div>
+        <my:videoInfo video="${requestScope.video}"/>
 
         <!-- Video player -->
         <div class="player-container">
-            <my:videoPlayer dir="car-mpd/car.mpd"></my:videoPlayer>
+            <my:videoPlayer dir="${requestScope.video.location}" />
         </div>
     </div>
 </div>

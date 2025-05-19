@@ -1,5 +1,6 @@
 package videohostingproject.helper;
 
+import videohostingproject.entity.IdList;
 import videohostingproject.entity.Video;
 
 import java.io.FileInputStream;
@@ -10,17 +11,17 @@ import java.util.ArrayList;
 
 public abstract class VideoListHelper {
 
-    public static ArrayList<Video> readAdList(String dataPath) {
+    public static IdList<Video> readVideoList(String dataPath) {
         try {
             ObjectInputStream in = new ObjectInputStream(new
                     FileInputStream(dataPath));
-            return (ArrayList<Video>)in.readObject();
+            return (IdList<Video>)in.readObject();
         } catch (Exception e) {
-            return new ArrayList<Video>();
+            return new IdList<Video>();
         }
     }
 
-    public static void saveAdList(ArrayList<Video> videos, String dataPath) {
+    public static void saveVideoList(IdList<Video> videos, String dataPath) {
         synchronized (videos) {
             try {
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(dataPath));

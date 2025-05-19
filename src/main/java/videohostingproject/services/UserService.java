@@ -8,13 +8,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class UserService implements Serializable {
-    private static int lastId;
     private IdList<User> globalUsers;
     private String dataPath;
     public UserService(String dataPath) {
         this.dataPath = dataPath;
-        lastId = 0;
         globalUsers = UserListHelper.readUserList(dataPath);
+        globalUsers.add(new User(globalUsers.getLastId(), "admin", "admin", "admin", true));
     }
 
     public ArrayList<User> getUsers() {
@@ -25,11 +24,13 @@ public class UserService implements Serializable {
         globalUsers.add(user);
         UserListHelper.saveUserList(globalUsers, dataPath);
     }
-    public void addUser(String username, String password, String email) {
+    public boolean addUser(String username, String password, String email) {
+        if(findUser(username) != null) return false;
         User user = new User(globalUsers.getLastId(), username, password, email);
         globalUsers.incLastId();
         globalUsers.add(user);
         UserListHelper.saveUserList(globalUsers, dataPath);
+        return true;
     }
 
     public User findUser(String username) {
@@ -57,5 +58,16 @@ public class UserService implements Serializable {
         return "UserService{" +
                 ", dataPath='" + dataPath + '\'' +
                 '}';
+    }
+    public void save(){
+        UserListHelper.saveUserList(globalUsers, dataPath);
+    }
+
+    public boolean grantAdminToUser(String username) {
+        User u = findUser(username);
+        if(u==null) return false;
+        u.setAdmin(true);
+        save();
+        return true;
     }
 }

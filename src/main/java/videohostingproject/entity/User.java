@@ -26,6 +26,7 @@ public class User implements Serializable, Identifiable {
         this.password = password;
         this.email = email;
         this.isAdmin = false;
+        this.history = new ArrayList<>();
     }
     public User(){
         this.id = 0;
@@ -75,6 +76,10 @@ public class User implements Serializable, Identifiable {
         return history;
     }
     public void addToHistory(int id) {
-        history.add(id);
+        if(history.contains(id)) history.remove(Integer.valueOf(id));
+        history.add(0, id);
+    }
+    public int totalHistoryPages(){
+        return (history.size() / 6 == 0) ? 1 : history.size() / 6;
     }
 }

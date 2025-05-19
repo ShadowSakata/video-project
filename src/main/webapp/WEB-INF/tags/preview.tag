@@ -1,8 +1,8 @@
 <%@tag pageEncoding="UTF-8" %>
-<%@attribute name="dir" required="true" type="java.lang.String" %>
+<%@attribute name="video" required="true" type="videohostingproject.entity.Video" %>
 
-<a href="view.jsp">
-    <img src="${dir}/preview.jpg" style="
+<a href="view?id=${video.id}">
+    <img src="${video.location}/preview.jpg" style="
         width: 100%;
         height: auto;
         flex-shrink: 0;
